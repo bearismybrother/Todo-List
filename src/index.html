@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title> 
-    <link rel="stylesheet" href="style.css" type="text/css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="containerHead">
-            <button class="addTask" style="height: fit-content; width:auto;">Add Task</button>
-            <div>Notification Bell</div>
-            <div>something cool here</div>
+      <div class="containerHead">
+        <button class="openForm" style="height: fit-content; width: auto">
+          Add Task
+        </button>
+        <div>Notification Bell</div>
+        <div>something cool here</div>
+      </div>
+      <div class="containerBody">
+        <div class="sideBar"></div>
+        <div id="cardsContainer">
         </div>
-        <div class="containerBody">
-            <div class="sideBar">
+      </div>
 
-            </div>
-            <div class="cardsContainer">
-                <div class="cards">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <form id = "form" class="centered popupForm closed">
-        <button type ="button" class="closeForm" style = "position: absolute; top:5%; left:90%">X</button>
-        <div class = "error" id="errorText"></div>
+      <form id="form" class="centered popupForm closed">
+        <button
+          type="button"
+          class="closeForm"
+          style="position: absolute; top: 5%; left: 90%"
+        >
+          X
+        </button>
+        <div class="error" id="errorText"></div>
         <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title">
-        </div>
-
-        <div>
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" />
         </div>
 
         <div>
-            <label for="priority">Priority</label>
-            <select name="Priority" id="priority" name ="priority">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
+          <label for="description">Description</label>
+          <div></div>
+          <textarea
+            name="description"
+            id="description"
+            cols="25"
+            rows="5"
+          ></textarea>
         </div>
-        <input type="submit" value="Add Task" />
-    </form>
+
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" />
+        </div>
+
+        <div>
+          <label for="priority">Priority</label>
+          <select name="Priority" id="priority" name="priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <button type="button" id="submitForm">Submit</button>
+      </form>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
