@@ -20,6 +20,7 @@ closeFormBtn.addEventListener("click", () => {
 
 function openForm() {
   document.querySelector(".popupForm").classList.remove("closed");
+  date.value = formatDate(new Date().toLocaleString());
 }
 
 function closeForm() {
@@ -63,28 +64,36 @@ submitFormBtn.addEventListener("click", (e) => {
   }
 });
 
-class Task {
-  isCompleted = false;
+//set default values for date in form
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
 
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
+//move all of these and import
+class Task {
   constructor(title, description, dueDate, priority) {
     this.title = title;
-    (this.description = description), (this.dueDate = dueDate);
+    this.description = description;
+    this.dueDate = dueDate;
     this.priority = priority;
   }
 
   editTask() {}
-
-  finishedTask() {
-    this.isCompleted = true;
-  }
-  expandDescription() {}
 }
 
 class TaskManager {
   static tasks = [];
-
   static addTask(task) {
     this.tasks.push(task);
+    this.tasks.sort(sortByDate);
     updateAllTasksToDOM(this.tasks);
   }
 
@@ -94,24 +103,61 @@ class TaskManager {
   }
 }
 
+function sortByDate(a, b) {
+  console.log(a.dueDate);
+  const [aYear, aMonth, aDay] = a.dueDate.split("-");
+  const [bYear, bMonth, bDay] = b.dueDate.split("-");
+  if (aYear !== bYear) {
+    return aYear - bYear;
+  } else if (aMonth !== bMonth) {
+    return aMonth - bMonth;
+  } else {
+    return aDay - bDay;
+  }
+}
+
 function updateAllTasksToDOM(tasks) {
+  cardsContainer.innerHTML = "";
   tasks.forEach((task) => {
     const taskToAdd = document.createElement("div");
     taskToAdd.classList.add("card");
 
+    //Front of the card(general info)
+    const frontCard = document.createElement("div");
+    frontCard.classList.add("front");
     const title = document.createElement("p");
     title.textContent = task.title;
-    const description = document.createElement("p");
-    description.textContent = "Description: " + task.description;
+    const shortDescription = document.createElement("p");
+    shortDescription.textContent = "Description: " + task.description;
+    shortDescription.style =
+      "align-self: start; overflow: hidden; margin: 0; height: 100%; width: 100%";
     const dueDate = document.createElement("p");
     const [year, month, date] = task.dueDate.split("-");
-    dueDate.textContent = "Due: " + `${month}/${date}/${year}`
+    dueDate.textContent = "Due: " + `${month}/${date}/${year}`;
 
-    taskToAdd.appendChild(title);
-    taskToAdd.appendChild(description);
-    taskToAdd.appendChild(dueDate);
-    taskToAdd.classList.add(tasks.priority);
+    frontCard.appendChild(title);
+    frontCard.appendChild(shortDescription);
+    frontCard.appendChild(dueDate);
 
+    //Back of the card
+    const backCard = document.createElement("div");
+    backCard.classList.add("back");
+    const longDescription = document.createElement("p");
+    longDescription.style =
+      "overflow: auto; height: 100%; width: 100%; margin: 0";
+    longDescription.textContent = task.description;
+    deleteTaskBtn = document.createElement("btn");
+    deleteTaskBtn.textContent = "Delete";
+    deleteTaskBtn.classList.add ("button")
+    deleteTaskBtn.addEventListener("click", () => {
+      TaskManager.deleteTask(task);
+    });
+    backCard.appendChild(longDescription);
+    backCard.appendChild(deleteTaskBtn);
+
+    taskToAdd.appendChild(frontCard);
+    taskToAdd.appendChild(backCard);
+    taskToAdd.classList.add(task.priority + "Prio");
     taskToAdd.addEventListener(
       "click",
       (e = {

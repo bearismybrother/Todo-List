@@ -16,8 +16,11 @@
         <div>something cool here</div>
       </div>
       <div class="containerBody">
-        <div class="sideBar"></div>
+        <div class="sideBar">
+          
+        </div>
         <div id="cardsContainer">
+          <!-- new Tasks created will go here -->
         </div>
       </div>
 
@@ -48,15 +51,15 @@
 
         <div>
           <label for="date">Date</label>
-          <input type="date" id="date" name="date" />
+          <input type="date" id="date" name="date" value="2013-01-08" />
         </div>
 
         <div>
           <label for="priority">Priority</label>
           <select name="Priority" id="priority" name="priority">
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
             <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
         </div>
         <button type="button" id="submitForm">Submit</button>

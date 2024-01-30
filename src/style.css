@@ -1,38 +1,38 @@
 /*Add Task*/
-.popupForm{
-    width: 25%;
-    height: 50%; 
-    background-color: aqua;
-    display: flex; 
-    flex-direction: column;
-    align-items: start;
-    justify-content: space-evenly;
-    padding: 10px;
-    border: 0.2em black solid;
+.popupForm {
+  width: 25%;
+  height: 50%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-evenly;
+  padding: 10px;
+  border: 0.2em black solid;
 }
 
-.addTask {
+.openForm {
   background-color: #28a745;
-  color: #fff; 
+  color: #fff;
   padding: 8px 12px;
   border: none;
   font-size: 16px;
   transition: background-color 0.3s, box-shadow 0.3s;
 
-  &:hover{
-    background-color:darkgreen;
+  &:hover {
+    background-color: darkgreen;
     height: 100;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transform: scale(1.2);
   }
 }
 
-#form label{
+#form label {
   font-style: italic;
   width: 100%;
 }
 
-.closed{
+.closed {
   display: none;
 }
 
@@ -44,55 +44,90 @@
   transform: translate(-50%, -50%);
 }
 
-.error{
+.error {
   border: red solid 1px;
 }
-.error#errorText{
-  background-color:white ;
+.error#errorText {
+  background-color: white;
   visibility: hidden;
   position: absolute;
   top: 95%;
   color: red;
 }
 
-#form div input{
+#form div input {
   width: 100%;
 }
 
-.container{
+.container {
   display: grid;
   grid-template-rows: 1fr 5fr;
   height: 100vh;
 }
 
-.containerHead{
+.containerHead {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.containerBody{
+.containerBody {
   display: grid;
   grid-template-columns: 1fr 5fr;
 }
 
-#cardsContainer{
-  background-color: azure;
+#cardsContainer {
+  background-color: gray;
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 25%));
   overflow: auto;
-  gap: 20px;
 }
 
-#cardsContainer .card{
+#cardsContainer .card {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+  margin: 4px;
+}
+
+.card > .front {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
 
-.HighPrio{
+.card > .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
 
+.card:hover {
+  transform: rotateY(180deg);
+}
+
+.HighPrio {
+  background-color: lightcoral;
+}
+
+.MediumPrio {
+  background-color: lightgreen;
+}
+
+.LowPrio {
+  background-color: aliceblue;
+}
+
+.button {
+  border: black solid 2px;
+  background-color: red;
 }
